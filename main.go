@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"io/ioutil"
 	"strings"
+	"time"
 )
 
 func getCity() string {
@@ -47,7 +48,7 @@ func getWeather(apiKey string, city string)  {
 		fmt.Print(err)
 	}
 	temp := int32(tempToFloat) - 273
-	fmt.Print("Температура: ",temp, "°C")
+	fmt.Print("\nТемпература: ",temp, "°C")
 
 	getPressure, err := jsonparser.GetUnsafeString(jsonData, "main", "pressure")
 	if err != nil {
@@ -71,10 +72,11 @@ func getWeather(apiKey string, city string)  {
 	if err != nil {
 		fmt.Print(err)
 	}
-	fmt.Print("\nВаш город: ",getCityName)
+	fmt.Print("\nВаш город: ",getCityName + "\n")
 }
 
 func main() {
 	apiKey:=" "
 	getWeather(apiKey, getCity())
+	time.Sleep(3000 * time.Millisecond)
 }
